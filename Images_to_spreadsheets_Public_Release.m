@@ -1,7 +1,7 @@
 %% Images_to_spreadsheets.m
 % COPYRIGHT: MOHAMMAD MAHDI GHASSEMI, MIT
 % DESCRIPTION: THIS CODE CONVERTS IMAGES TO SPREASHEETS.
-% INSTRUCTIONS: PLEASE SEE PAPER FOR FULL DETAIL:
+% INSTRUCTIONS: PLEASE SEE SUPPLEMENTAL_MATERIALS.PDF FOR FULL DETAIL:
 % OUTPUTS: a <filename>_results.mat file that
 [fList,pList] = matlab.codetools.requiredFilesAndProducts('Images_to_spreadsheets_Public_Release.m')
 
