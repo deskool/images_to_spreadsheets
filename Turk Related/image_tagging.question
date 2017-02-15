@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
+    <Overview>
+        <Title>Transcribe this Image</Title>
+
+        <!-- Here are the guidelines. Recommend keeping these short and crisp. -->
+        <Text>GUIDELINES:</Text>
+        <List>
+            <ListItem>You must transcribe the text shown in the image.</ListItem>
+	    <!-- <ListItem>Please transcribe any '+' or '-' signs, as well as decimal points that show up in the image</ListItem> -->
+            <!-- <ListItem>If the image is seperated in with a diagonal line, please place a '/' in your answer</ListItem> -->              
+	    <!-- <ListItem>If the contents of the image is not legible, please inset '?'</ListItem> -->
+            <!-- <ListItem>If the Image contains text, please enter '?'</ListItem> -->
+            <!-- <ListItem>If the Image contains a mix of charactors and numbers, only transcribe the numbers.</ListItem> -->
+            <ListItem>If the image is BLANK, then enter NOTHING. </ListItem>
+            <ListItem>PLEASE NOTE: Your transcription will be automattically crossed checked, against other Turk users to ensure accuracy.</ListItem>
+        </List>
+
+        <!-- Here's the image file to be tagged -->
+        <Text>Image:</Text>
+        <EmbeddedBinary>
+          <EmbeddedMimeType>
+            <Type>image</Type>
+            <SubType>jpg</SubType>
+          </EmbeddedMimeType>
+          <DataURL>${image_url}</DataURL>
+          <AltText>Image to tag</AltText>
+	  <Width>150</Width>
+	  <Height>150</Height>
+        </EmbeddedBinary>
+    </Overview>
+
+    <!-- The code below will create 1 inputs for tags. It will force the first 1 to be mandatory. -->
+    #set( $minimumNumberOfTags = 1 )
+    #foreach( $tagNum in [1] )
+        <Question>
+            <QuestionIdentifier>tag${tagNum}</QuestionIdentifier>
+            #if( $tagNum <= $minimumNumberOfTags)
+                <IsRequired>true</IsRequired>
+            #else
+                <IsRequired>false</IsRequired>
+            #end
+            <QuestionContent><Text>Tag ${tagNum}:</Text></QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="50" />
+			<AnswerFormatRegex regex="^.*$" errorText="Please Enter a number, a '?' if the cell is illegible, or leave blank if there is nothing in the image."/>
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+    #end
+
+</QuestionForm>
+
